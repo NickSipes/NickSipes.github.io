@@ -1,1 +1,66 @@
-<button type="button">Click Me!</button>
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.button {
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+  background-color: #4CAF50;
+  color: white;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Locker Test</h1>
+
+<p>Click a button to unlock a locker. The locker will lock again after 20 seconds</p>
+
+<p id="Locker1" onclick="unlockLocker(1)">
+    <button class="button button1">Locker1</button>
+</p>
+<p id="Locker2" onclick="unlockLocker(2)">
+    <button class="button button1">Locker2</button>
+</p>
+<p id="Locker3" onclick="unlockLocker(3)">
+    <button class="button button1">Locker3</button>
+</p>
+
+<script>
+    function unlockLocker(lockerNum) {
+        target = null
+        switch (lockerNum) {
+            case 1:
+                text = "Unlocking locker 1"
+                target = "Locker1"
+            case 2:
+                text = "Unlocking locker 2"
+                target = "Locker2"
+            case 3:
+                text = "Unlocking locker 3"
+                target = "Locker3"
+        }
+      document.getElementById(target).innerHTML = "YOU CLICKED ME!";
+    }
+</script>
+
+</body>
+</html>
