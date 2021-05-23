@@ -1,75 +1,47 @@
-<!DOCTYPE html>
 <html>
-<head>
-<style>
-.button {
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
+  <head>
+      <title>Spark function buttons Example</title>
+  </head>
 
-.button1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
-}
+  <body>
+    
+    <button type="button" onclick="functionCall('openLocker', 'functionArgument')">Open locker 1</button>
+    <button type="button" onclick="functionCall('openLocker', 'functionArgument')">Open locker 2</button>
+    <button type="button" onclick="functionCall('openLocker', 'functionArgument')">Open locker 3</button>
+    
+    
+    <script>
+      //you can use your accesstoken, or your email/passsword to log in. Uncomment accordingly below.
 
-.button1:hover {
-  background-color: #4CAF50;
-  color: white;
-}
+      var accessToken = "f6f5515001da8f4fee780973894617f50758fd0e";
+      var deviceID = "recre-prototype-7445";
+      
+      spark.on('login', function(response) {   
+        
+        console.log(response);
+        
+      });
 
-</style>
-</head>
-<body>
-
-<h1>Locker Test</h1>
-
-<p>Click a button to unlock a locker. The locker will lock again after 20 seconds</p>
-
-<form action="/?id=1" method="get" target="_blank">
-  <div>
-    <label name="lockerID", id="lockerID", value="locker1">
-    <button type="submit"  formmethod="post" class="button button1">Locker1</button>
-  </div>
-</form>
-<p id="Locker2" onclick="unlockLocker(2)">
-    <button class="button button1">Locker2</button>
-</p>
-<p id="Locker3" onclick="unlockLocker(3)">
-    <button class="button button1">Locker3</button>
-</p>
-
-<script>
-    function unlockLocker(lockerNum) {
-        target = null
-        switch (lockerNum) {
-            case 1:
-                text = "Unlocking locker 1"
-                target = "Locker1"
-                sendForm(target)
-                break
-            case 2:
-                text = "Unlocking locker 2"
-                target = "Locker2"
-                sendForm(target)
-                break
-            case 3:
-                text = "Unlocking locker 3"
-                target = "Locker3"
-                sendForm(target)
-                break
+      // callback to be executed by each core
+      var callback = function(err, data) {
+        if (err) {
+          console.log('An error occurred while getting core attrs:', err);
+        } else {
+          console.log('Core attr retrieved successfully:', data);
         }
-      document.getElementById(target).innerHTML = text;
-    }
-</script>
-
-</body>
+      };
+      
+      function functionCall(functionName, functionArgument){
+        // The function needs to be defined  in the firmware uploaded to the
+        // the Spark core and registered to the Spark cloud, same thing we do
+        // with variables. You pass along the name of the function and the params.
+        spark.callFunction(deviceID, functionName, functionArgument, callback);  
+      }
+      
+      // Uncomment a line below depending on your preferred log-in method.   
+      //spark.login({ username: 'email@example.com', password: 'password' });  
+      spark.login({ accessToken: accessToken });
+      
+    </script>
+  </body>
 </html>
