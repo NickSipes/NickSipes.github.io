@@ -34,11 +34,12 @@
 
 <p>Click a button to unlock a locker. The locker will lock again after 20 seconds</p>
 
-<p id="Locker1" onclick="unlockLocker(1)">
-  <form> action="/action_page.php" method="get" target="_blank">
+<form action="/unlockLocker" method="get" target="_blank">
+  <div>
+    <label name="lockerID", id="lockerID", value="locker1">
     <button type="submit"  formmethod="post" class="button button1">Locker1</button>
-  </form>
-</p>
+  </div>
+</form>
 <p id="Locker2" onclick="unlockLocker(2)">
     <button class="button button1">Locker2</button>
 </p>
